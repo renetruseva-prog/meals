@@ -2,22 +2,24 @@ import React, { useState } from 'react';
 
 export default function About({ loaderData }) {
     const [inputValue, setInputValue] = useState('');
-    const filteredData = loaderData.filter(category => 
-  category.strCategory.toLowerCase().startsWith(inputValue.toLowerCase())
-);
+    const filteredData = loaderData.filter(category =>
+        category.strCategory.toLowerCase().startsWith(inputValue.toLowerCase())
+    );
     return (
         <div className="container">
-            <form onSubmit={handleSubmit}>
-          <label>
-            <input
-                type="text"
-                className="input"
-                onChange={(e) => setInputValue(e.target.value)}
-                value={inputValue} 
-                placeholder="Search for a category..."
-            />
-            </label>
-            </form>
+            <div className="input-container">
+                <label>
+                    <div className="input-wrapper">
+                    <input
+                        type="text"
+                        className="input"
+                        onChange={(e) => setInputValue(e.target.value)}
+                        value={inputValue}
+                        placeholder="Search for a category..."
+                    />
+                    </div>
+                </label>
+            </div>
             <br></br>
             <ul className="grid">
                 {filteredData.map((cat) => (

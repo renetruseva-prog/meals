@@ -260,6 +260,24 @@ form label:focus-within {
     overflow: hidden;
 }
 
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    width: min(560px, 100%);
+    margin-bottom: 0.5rem;
+}
+
+.input-wrapper:focus-within {
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: translateY(-2px);
+}
+
 /* ── Keyframes ── */
 @keyframes popIn {
     to {
