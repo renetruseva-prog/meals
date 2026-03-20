@@ -8,17 +8,18 @@ export default function About({ loaderData }) {
     );
     return (
         <div className="container">
-                   <p><Link to="/">Go back</Link></p>
+
+            <div className='about'><Link to="/">Go back</Link></div>
             <div className="input-container">
                 <label>
                     <div className="input-wrapper">
-                    <input
-                        type="text"
-                        className="input"
-                        onChange={(e) => setInputValue(e.target.value)}
-                        value={inputValue}
-                        placeholder="Search for a category..."
-                    />
+                        <input
+                            type="text"
+                            className="input"
+                            onChange={(e) => setInputValue(e.target.value)}
+                            value={inputValue}
+                            placeholder="Search for a category..."
+                        />
                     </div>
                 </label>
             </div>
