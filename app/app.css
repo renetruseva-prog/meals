@@ -1,15 +1,411 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,800;1,700&family=Syne:wght@400;700;800&display=swap');
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+:root {
+    --orange: #FF5A1F;
+    --yellow: #F7F5A3;
+    --crimson: #8B0A2A;
+    --pink: #F2B8C6;
+    --purple: #5B1E8C;
+    --teal: #C3EFE5;
+    --ink: #1A1008;
+    --white: #FFFEF8;
+    --radius: 20px;
 }
 
-html,
-body {
-  @apply bg-white dark:bg-gray-950;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-  @media (prefers-color-scheme: dark) {
-    color-scheme: dark;
-  }
+body {
+    background-color: var(--orange);
+    font-family: 'Syne', sans-serif;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 6rem;
+}
+
+/* â”€â”€ Form â”€â”€ */
+form {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0.5rem;
+}
+
+form label {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    width: min(560px, 100%);
+}
+
+form label:focus-within {
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: translateY(-2px);
+}
+
+.input {
+    flex: 1;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--ink);
+    padding: 0.85rem 1.25rem;
+    letter-spacing: 0.01em;
+}
+
+.input::placeholder {
+    color: var(--ink);
+    opacity: 0.3;
+    font-weight: 400;
+}
+
+.button {
+    flex-shrink: 0;
+    background: var(--orange);
+    color: var(--white);
+    font-family: 'Syne', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: none;
+    border-left: 2.5px solid var(--ink);
+    padding: 0.85rem 1.5rem;
+    cursor: pointer;
+    transition: background 0.15s ease;
+}
+
+.button:hover {
+    background: var(--ink);
+}
+
+/* â”€â”€ Input wrapper (your new search bar) â”€â”€ */
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    background: var(--white);
+    border: 2.5px solid var(--ink);
+    border-radius: 999px;
+    overflow: hidden;
+    box-shadow: 4px 4px 0 var(--ink);
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+    width: min(560px, 100%);
+    margin-bottom: 0.5rem;
+}
+
+.input-wrapper:focus-within {
+    box-shadow: 6px 6px 0 var(--ink);
+    transform: translateY(-2px);
+}
+
+/* â”€â”€ Grid â”€â”€ */
+.grid {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+}
+
+/* â”€â”€ Color rotation â”€â”€ */
+.card:nth-child(6n+1) {
+    --card-bg: var(--yellow);
+    --title-color: var(--ink);
+    --tag-bg: var(--orange);
+    --tag-color: var(--white);
+}
+
+.card:nth-child(6n+2) {
+    --card-bg: var(--crimson);
+    --title-color: var(--white);
+    --tag-bg: var(--pink);
+    --tag-color: var(--crimson);
+}
+
+.card:nth-child(6n+3) {
+    --card-bg: var(--pink);
+    --title-color: var(--ink);
+    --tag-bg: var(--crimson);
+    --tag-color: var(--white);
+}
+
+.card:nth-child(6n+4) {
+    --card-bg: var(--purple);
+    --title-color: var(--white);
+    --tag-bg: var(--yellow);
+    --tag-color: var(--ink);
+}
+
+.card:nth-child(6n+5) {
+    --card-bg: var(--teal);
+    --title-color: var(--ink);
+    --tag-bg: var(--purple);
+    --tag-color: var(--white);
+}
+
+.card:nth-child(6n+6) {
+    --card-bg: var(--white);
+    --title-color: var(--ink);
+    --tag-bg: var(--orange);
+    --tag-color: var(--white);
+}
+
+/* â”€â”€ Card â”€â”€ */
+.card {
+    background: var(--card-bg);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 2.5px solid var(--ink);
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+
+    opacity: 0;
+    transform: translateY(28px) rotate(-0.4deg);
+    animation: popIn 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.25s ease;
+}
+
+.card:nth-child(even) {
+    transform: translateY(28px) rotate(0.4deg);
+}
+
+.card:nth-child(1) {
+    animation-delay: 0.03s;
+}
+
+.card:nth-child(2) {
+    animation-delay: 0.07s;
+}
+
+.card:nth-child(3) {
+    animation-delay: 0.11s;
+}
+
+.card:nth-child(4) {
+    animation-delay: 0.15s;
+}
+
+.card:nth-child(5) {
+    animation-delay: 0.19s;
+}
+
+.card:nth-child(6) {
+    animation-delay: 0.23s;
+}
+
+.card:nth-child(7) {
+    animation-delay: 0.27s;
+}
+
+.card:nth-child(8) {
+    animation-delay: 0.31s;
+}
+
+.card:nth-child(9) {
+    animation-delay: 0.35s;
+}
+
+.card:nth-child(10) {
+    animation-delay: 0.39s;
+}
+
+.card:nth-child(n+11) {
+    animation-delay: 0.43s;
+}
+
+.card:hover {
+    transform: translateY(-8px) rotate(0deg) scale(1.02);
+    box-shadow: 8px 10px 0 var(--ink);
+}
+
+.card-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    display: block;
+    border-bottom: 2.5px solid var(--ink);
+}
+
+
+.card-content {
+    padding: 1rem 1.25rem 1.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+}
+
+.card-content h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 1.45rem;
+    color: var(--title-color);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.card-content p {
+    font-size: 0.79rem;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--title-color);
+    opacity: 0.72;
+    max-height: 3.2em;
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.3s ease;
+}
+
+.card:hover .card-content p {
+    max-height: 40em;
+    opacity: 0.88;
+}
+
+
+@keyframes popIn {
+    to {
+        opacity: 1;
+        transform: translateY(0) rotate(0deg);
+    }
+}
+
+@media (max-width: 600px) {
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+    }
+
+    .card-content h2 {
+        font-size: 1.1rem;
+    }
+
+    form label {
+        border-radius: 14px;
+    }
+}
+
+@media (max-width: 380px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+.home {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 3rem 1.5rem;
+    text-align: center;
+}
+
+/* â”€â”€ Big italic title â”€â”€ */
+.home-title {
+    font-family: 'Fraunces', serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: clamp(3.5rem, 12vw, 9rem);
+    color: var(--yellow);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+}
+
+/* â”€â”€ Subtitle â”€â”€ */
+.home-subtitle {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--white);
+    opacity: 0.7;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+}
+
+/* â”€â”€ Nav list â”€â”€ */
+.home ul {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    max-width: 360px;
+}
+
+/* â”€â”€ Link card â”€â”€ */
+.home ul li a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Fraunces', serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: var(--radius);
+    border: 2.5px solid var(--ink);
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.2s ease,
+        background 0.15s ease;
+}
+
+
+.about {
+    padding-bottom: 1rem;
+}
+
+.about a {
+    font-family: 'Fraunces', serif;
+    color: var(--yellow);
+    text-decoration: none;
+}
+
+.home ul li:nth-child(2) a {
+    background: var(--pink);
+}
+
+.home ul li:nth-child(3) a {
+    background: var(--teal);
+}
+
+.home ul li:nth-child(4) a {
+    background: var(--purple);
+    color: var(--white);
+}
+
+.home ul li a::after {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    opacity: 0.5;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.home ul li a:hover {
+    transform: translateY(-5px);
+    box-shadow: 8px 8px 0 var(--ink);
+}
+
+.home ul li a:hover::after {
+    opacity: 1;
+    transform: translateX(4px);
 }
