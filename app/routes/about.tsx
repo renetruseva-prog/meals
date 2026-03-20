@@ -13,11 +13,9 @@ export default function About({ loaderData }) {
                 type="text"
                 className="input"
                 onChange={(e) => setInputValue(e.target.value)}
-                value={inputValue}
+                value={inputValue} 
+                placeholder="Search for a category..."
             />
-            <button type="submit" className="button">
-                Search
-            </button>
             </label>
             </form>
             <br></br>
