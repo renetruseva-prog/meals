@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from "react-router";
 
 export default function About({ loaderData }) {
     const [inputValue, setInputValue] = useState('');
@@ -7,6 +8,7 @@ export default function About({ loaderData }) {
     );
     return (
         <div className="container">
+                   <p><Link to="/">Go back</Link></p>
             <div className="input-container">
                 <label>
                     <div className="input-wrapper">
