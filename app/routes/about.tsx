@@ -1,8 +1,28 @@
+import React, { useState } from 'react';
+
 export default function About({ loaderData }) {
+    const [inputValue, setInputValue] = useState('');
+    const filteredData = loaderData.filter(category => 
+  category.strCategory.toLowerCase().startsWith(inputValue.toLowerCase())
+);
     return (
         <div className="container">
+            <form onSubmit={handleSubmit}>
+          <label>
+            <input
+                type="text"
+                className="input"
+                onChange={(e) => setInputValue(e.target.value)}
+                value={inputValue}
+            />
+            <button type="submit" className="button">
+                Search
+            </button>
+            </label>
+            </form>
+            <br></br>
             <ul className="grid">
-                {loaderData.map((cat) => (
+                {filteredData.map((cat) => (
                     <li key={cat.idCategory} className="card">
                         <img
                             src={cat.strCategoryThumb}
@@ -16,7 +36,7 @@ export default function About({ loaderData }) {
                     </li>
                 ))}
             </ul>
-        </div>
+        </div >
     );
 }
 
@@ -25,4 +45,8 @@ export async function clientLoader({ params }: Route.LoaderArgs) {
     const res = await fetch(`https://www.themealdb.com/api/json/v1/1/categories.php`);
     const data = await res.json();
     return data.categories;
+}
+
+export function handleSubmit(e) {
+    e.preventDefault();
 }
